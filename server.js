@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 
 // route root
-app.get("/", async (req, res) => {
+app.get("/", async (_req, res) => {
   res.send("Hello world!");
 });
 
