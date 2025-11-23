@@ -1,5 +1,6 @@
 console.log("server file is great!");
 import express from "express";
+import jokeRoutes from "./routes/jokeRoutes.js";
 const app = express();
 const PORT = 3000;
 
@@ -15,6 +16,8 @@ app.get("/", async (_req, res) => {
 app.get("/ping", async (_req, res) => {
   res.json({ message: "Pinged successfully!", timestamp: Date.now() });
 });
+
+app.use("/jokes", jokeRoutes);
 
 // Start listening
 app.listen(PORT, () => {
