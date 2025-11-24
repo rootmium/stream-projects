@@ -1,33 +1,35 @@
-import { jokes, getNextId } from "../data/jokes.js";
+import { prisma } from "../lib/prisma.js";
 
 export const getAllJokes = async (_req, res) => {
-  res.status(200).json(jokes);
+  const jokes = await prisma.joke.findMany();
+  res.json(jokes);
+};
+
+const selectJokeById = async (id) => {
+  const joke = await prisma.joke.findUnique({
+    where: { id: Number.parseInt(id) },
+  });
+  return joke;
 };
 
 export const getJokeById = async (req, res) => {
   const requestId = req.params.id;
-  let finalJoke;
-  jokes.map((joke) => {
-    if (joke.id === parseInt(requestId)) finalJoke = joke;
-  });
-
-  if (finalJoke) return res.status(200).json(finalJoke);
-  res.status(404).json({ error: "Joke not found" });
+  const joke = await selectJokeById(requestId);
+  res.json(joke);
 };
 
 export const getRandomJoke = async (_req, res) => {
-  const joke = jokes[Math.floor(Math.random() * jokes.length)];
+  const totalJokes = await prisma.joke.count();
+  const randomId = Math.floor(Math.random() * totalJokes);
+  const joke = await selectJokeById(randomId);
   res.status(200).json(joke);
 };
 
 export const createJoke = async (req, res) => {
   const text = req.body.text;
 
-  const newJoke = {
-    id: getNextId(),
-    joke: text,
-  };
-
-  jokes.push(newJoke);
-  res.status(201).json(jokes);
+  const newJoke = await prisma.joke.create({
+    data: { text },
+  });
+  res.status(201).json(newJoke);
 };
