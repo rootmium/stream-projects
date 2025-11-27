@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.ts",
-    "dev": "nodemon server.ts",
-    "seed": "node seed.ts"
+    "start": "deno server.ts",
+    "dev": "deno server.ts",
+    "seed": "deno seed.ts"
   },
   "repository": {
     "type": "git",
