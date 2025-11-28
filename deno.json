@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@logtape/logtape": "jsr:@logtape/logtape@^1.2.0"
+  }
+}
