@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import jokes from "./jokes.json"
 
 const port = 3000;
 
@@ -10,7 +11,19 @@ const server = createServer((req, res) => {
   if (path === "/" && method === "GET") {
     res.writeHeader(200, { "Content-Type": "text/json" })
     res.end(JSON.stringify({ name: "hello world!" }))
-  } else {
+  }
+
+  else if (path === "/ping" && method === "GET") {
+    res.writeHeader(200, { "Content-Type": "text/html" })
+    res.end(`<h1>Server is fine.</h1><br><p>${new Date().getTime()}`)
+  }
+
+  else if (path === "/jokes" && method === "GET") {
+    res.writeHeader(200, { "Content-Type": "text/json" }) 
+    res.end(JSON.stringify(jokes, null, 2))
+  }
+
+  else {
     res.writeHeader(404, { "Content-Type": "text/json" })
     res.end(JSON.stringify({ erro: "Wrong url" }))
   }
