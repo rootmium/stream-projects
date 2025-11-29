@@ -1,0 +1,16 @@
+* Basic HTTP server
+
+
+
+* Test area
+#+BEGIN_SRC http
+  GET http://localhost:3000/
+#+END_SRC
+
+#+RESULTS:
+: HTTP/1.1 201 Created
+: Content-Type: text/json
+: Date: Sat, 29 Nov 2025 18:11:28 GMT
+: Content-Length: 23
+: 
+: {"name":"hello world!"}
