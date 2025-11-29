@@ -23,6 +23,21 @@ const server = createServer((req, res) => {
     res.end(JSON.stringify(jokes, null, 2))
   }
 
+    // random route
+  else if (path === "/jokes/random" && method === "GET") {
+    const randomId = Math.ceil(Math.random() * jokes.length)
+    let resultJoke
+
+    jokes.forEach((joke) => {
+      if (randomId === joke.id) {
+        resultJoke = joke
+      }
+    })
+
+    res.writeHeader(200, { "Content-Type": "text/json" })
+    res.end(JSON.stringify(resultJoke, null, 2))
+  }
+
     // route /jokes/:id
   else if (path.startsWith("/jokes/") && method === "GET") {
     const reqId = parseInt(path.split("/")[2])
