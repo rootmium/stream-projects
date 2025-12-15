@@ -1,6 +1,6 @@
 <script>
-  // let { answer, question = "No question" } = $props()
-  let nest = $props()
+	// let { answer, question = "No question" } = $props()
+	let nest = $props();
 </script>
 
 <p>This is from nested.</p>
